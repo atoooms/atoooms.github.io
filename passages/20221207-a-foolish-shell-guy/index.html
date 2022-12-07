@@ -27,7 +27,7 @@
 <meta property="og:description" content="我很喜欢Flow Launcher，他有一个功能是跑命令行。 我最近重启了博客，想着怎么更快地开始写博客。 于是我希望能用Flow Launcher搞一个快速脚本，调用hexo生成文章之后，将其打开。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-07T12:51:13.000Z">
-<meta property="article:modified_time" content="2022-12-07T12:51:16.144Z">
+<meta property="article:modified_time" content="2022-12-07T12:55:30.721Z">
 <meta property="article:author" content="库德里尔">
 <meta property="article:tag" content="shell">
 <meta property="article:tag" content="FlowLauncher">
@@ -211,7 +211,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-12-07 20:51:13 / 修改时间：20:51:16" itemprop="dateCreated datePublished" datetime="2022-12-07T20:51:13+08:00">2022-12-07</time>
+      <time title="创建时间：2022-12-07 20:51:13 / 修改时间：20:55:30" itemprop="dateCreated datePublished" datetime="2022-12-07T20:51:13+08:00">2022-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,11 +246,11 @@
 <p>但我觉得在bash里输入标题再生成并不美观，还在思考bat把参数传给shell的办法。</p>
 <p>这时我才皤然醒悟，我都用启动器了，为啥不直接跑sh脚本。</p>
 <p>于是赶紧改写。这样在用代码打开.sh时，可以直接传个标题参数进去。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">cd &lt;博客目录&gt;</span><br><span class="line">hexo new $1</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> &lt;博客目录&gt;</span><br><span class="line">hexo new <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="第二步-将其打开"><a href="#第二步-将其打开" class="headerlink" title="第二步 将其打开"></a>第二步 将其打开</h2><p>其实是个start的事情。</p>
 <p>根据我设定的文件名生成规则，可以直接算出生成的文件名。学了下start和shell变量的使用，很快就写出来了。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">cd &lt;博客目录&gt;</span><br><span class="line">filename=$1</span><br><span class="line">myfile=&quot;&lt;博客目录&gt;/source/_posts/$(date &quot;+%Y%m%d&quot;)-$&#123;filename&#125;.md&quot;</span><br><span class="line">hexo new $filename</span><br><span class="line">start &lt;编辑器目录&gt; $myfile</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> &lt;博客目录&gt;</span><br><span class="line">filename=<span class="variable">$1</span></span><br><span class="line">myfile=<span class="string">&quot;&lt;博客目录&gt;/source/_posts/<span class="subst">$(date <span class="string">&quot;+%Y%m%d&quot;</span>)</span>-<span class="variable">$&#123;filename&#125;</span>.md&quot;</span></span><br><span class="line">hexo new <span class="variable">$filename</span></span><br><span class="line">start &lt;编辑器目录&gt; <span class="variable">$myfile</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="第三步-Flow-Launcher的配置"><a href="#第三步-Flow-Launcher的配置" class="headerlink" title="第三步 Flow Launcher的配置"></a>第三步 Flow Launcher的配置</h2><p>1.10预览版支持Custom Query Shortcut，可以自定义查询捷径，有点类似于拿snippets写latex。</p>
 <p>于是我写了这样的规则：</p>
