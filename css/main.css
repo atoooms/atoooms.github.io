@@ -2688,6 +2688,17 @@ ul.breadcrumb li:last-child {
   }
 }
 p {
-  margin: 0 0 10px;
-  line-height: 1.5em;
+  margin: 0 0 12px;
+  line-height: 1.6em;
+  font-size: 0.95em;
+}
+.post-block,
+.comments {
+  padding: 30px;
+}
+.posts-expand .post-header {
+  margin-bottom: 30px;
+}
+.post-button {
+  margin-top: 35px;
 }
