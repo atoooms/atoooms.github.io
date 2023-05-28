@@ -2687,3 +2687,7 @@ ul.breadcrumb li:last-child {
     padding: 10px 12px;
   }
 }
+p {
+  margin: 0 0 10px;
+  line-height: 1.5em;
+}
